@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "keywords": ["upload", "file"],
   "dependencies": {
-    "component/emitter": "*"
+    "emitter-component": "*"
   },
   "devDependencies": {
     "express": "3.0.0rc4"
