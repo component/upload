@@ -15,7 +15,9 @@ app.get('/', function(req, res){
 });
 
 app.post('/upload', function(req, res){
-  console.log(req.files);
+  var file = req.files.file;
+  if (file) return res.send(200);
+  res.send(400);
 });
 
 app.use(express.static(__dirname));
