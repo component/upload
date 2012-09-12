@@ -19,6 +19,7 @@ app.post('/upload', function(req, res){
 });
 
 app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/..'));
 
 app.listen(3000);
 console.log('listening on port 3000');
