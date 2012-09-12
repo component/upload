@@ -10,7 +10,9 @@
   "devDependencies": {
     "express": "3.0.0rc4"
   },
-  "scripts": [
-    "index.js"
-  ]
+  "component": {
+    "scripts": {
+      "upload/index.js": "index.js"
+    }
+  }
 }
