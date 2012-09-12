@@ -35,6 +35,15 @@ upload.on('progress', reportProgress);
 upload.on('end', done);
 ```
 
+## Running tests
+
+  Run the Express test server:
+
+```
+$ npm install
+$ make test
+```
+
 # License
 
   MIT
