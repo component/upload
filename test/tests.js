@@ -14,6 +14,10 @@ describe('Upload', function(){
     upload.emit('something');
   })
 
+  it('should work without new', function(){
+    assert('something' == Upload('something').file);
+  })
+
   describe('#to(path)', function(){
     it('should POST to the given path', function(done){
       this.timeout(0);

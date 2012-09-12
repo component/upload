@@ -26,6 +26,7 @@ module.exports = Upload;
  */
 
 function Upload(file) {
+  if (!(this instanceof Upload)) return new Upload(file);
   Emitter.call(this);
   this.file = file;
 }
