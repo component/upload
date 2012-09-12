@@ -1,0 +1,15 @@
+{
+  "name": "upload",
+  "repo": "component/upload",
+  "description": "file upload and progress api",
+  "version": "0.0.1",
+  "keywords": ["upload", "file"],
+  "dependencies": {
+    "component/emitter": "*",
+    "component/inherit": "*"
+  },
+  "development": {},
+  "scripts": [
+    "index.js"
+  ]
+}
