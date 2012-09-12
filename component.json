@@ -5,8 +5,7 @@
   "version": "0.0.1",
   "keywords": ["upload", "file"],
   "dependencies": {
-    "component/emitter": "*",
-    "component/inherit": "*"
+    "component/emitter": "*"
   },
   "development": {},
   "scripts": [

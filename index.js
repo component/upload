@@ -3,8 +3,7 @@
  * Module dependencies.
  */
 
-var Emitter = require('emitter')
-  , inherit = require('inherit');
+var Emitter = require('emitter');
 
 /**
  * Expose `Upload`.
@@ -16,7 +15,7 @@ module.exports = Upload;
  * Initialize a new `Upload` file`.
  * This represents a single file upload.
  *
- * Emits:
+ * Events:
  *
  *   - `error` an error occurred
  *   - `progress` upload in progress (`e.percent` etc)
@@ -32,10 +31,10 @@ function Upload(file) {
 }
 
 /**
- * Inherits from `Emitter.prototype`.
+ * Mixin emitter.
  */
 
-inherit(Upload, Emitter);
+Emitter(Upload.prototype);
 
 /**
  * Upload to the given `path`.
