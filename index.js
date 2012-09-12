@@ -44,6 +44,7 @@ Emitter(Upload.prototype);
  */
 
 Upload.prototype.to = function(path){
+  // TODO: x-browser
   var req = this.req = new XMLHttpRequest;
   req.open('POST', path);
   req.onload = this.onload.bind(this);
