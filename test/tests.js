@@ -13,20 +13,38 @@ describe('Upload', function(){
     upload.on('something', done);
     upload.emit('something');
   })
-})
 
-describe('Upload#to(path)', function(){
-  it('should POST to the given path', function(done){
-    this.timeout(0);
-    input.addEventListener('change', function(){
-      var file = input.files[0];
-      var upload = new Upload(file);
-      assert(file == upload.file, '.file');
-      upload.to('/upload');
-      upload.on('end', function(res){
-        assert(200 == res.status, '200 response');
-        done();
-      });
-    }, false);
+  describe('#to(path)', function(){
+    it('should POST to the given path', function(done){
+      this.timeout(0);
+      input.addEventListener('change', function(){
+        var file = input.files[0];
+        var upload = new Upload(file);
+        assert(file == upload.file, '.file');
+        upload.to('/upload');
+        upload.on('end', function(res){
+          assert(200 == res.status, '200 response');
+          done();
+        });
+      }, false);
+    })
+
+    it('should emit "progress" events', function(done){
+      this.timeout(0);
+      input.addEventListener('change', function(){
+        var file = input.files[0];
+        var upload = new Upload(file);
+        upload.to('/upload');
+
+        upload.on('progress', function(e){
+          assert('progress' == e.type);
+          assert(e.percent, 'e.percent');
+        });
+
+        upload.on('end', function(res){
+          done();
+        });
+      }, false);
+    })
   })
 })
