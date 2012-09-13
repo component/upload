@@ -2,7 +2,7 @@
   "name": "upload-component",
   "repo": "component/upload",
   "description": "file upload and progress api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": ["upload", "file"],
   "dependencies": {
     "emitter-component": "*"
