@@ -94,6 +94,5 @@ Upload.prototype.onload = function(e){
 
 Upload.prototype.onprogress = function(e){
   e.percent = e.loaded / e.total * 100;
-  this.progress = e;
   this.emit('progress', e);
 };
