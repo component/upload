@@ -10,6 +10,7 @@
 ## Events
 
   - `error` an error occurred
+  - `abort` upload was aborted
   - `progress` (e) upload in progress (`e.percent`, `e.totalSize` etc)
   - `end` upload is complete
 

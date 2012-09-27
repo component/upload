@@ -18,6 +18,7 @@ module.exports = Upload;
  * Events:
  *
  *   - `error` an error occurred
+ *   - `abort` upload was aborted
  *   - `progress` upload in progress (`e.percent` etc)
  *   - `end` upload is complete
  *
@@ -63,6 +64,7 @@ Upload.prototype.to = function(path){
  */
 
 Upload.prototype.abort = function(){
+  this.emit('abort');
   this.req.abort();
 };
 
