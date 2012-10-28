@@ -3,12 +3,16 @@
   "repo": "component/upload",
   "description": "file upload and progress api",
   "version": "0.0.3",
-  "keywords": ["upload", "file"],
+  "keywords": [
+    "upload",
+    "file"
+  ],
   "dependencies": {
     "component/emitter": "*"
   },
   "development": {},
   "scripts": [
     "index.js"
-  ]
+  ],
+  "license": "MIT"
 }
