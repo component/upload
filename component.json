@@ -8,7 +8,7 @@
     "file"
   ],
   "dependencies": {
-    "component/emitter": "*"
+    "ForbesLindesay/submit": "*"
   },
   "development": {},
   "scripts": [

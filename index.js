@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var Emitter = require('emitter');
+var Submit = require('submit');
 
 /**
  * Expose `Upload`.
@@ -28,73 +28,10 @@ module.exports = Upload;
 
 function Upload(file) {
   if (!(this instanceof Upload)) return new Upload(file);
-  Emitter.call(this);
   this.file = file;
-}
-
-/**
- * Mixin emitter.
- */
-
-Emitter(Upload.prototype);
-
-/**
- * Upload to the given `path`.
- *
- * @param {String} path
- * @api public
- */
-
-Upload.prototype.to = function(path){
-  // TODO: x-browser
-  var req = this.req = new XMLHttpRequest;
-  req.open('POST', path);
-  req.onload = this.onload.bind(this);
-  req.onerror = this.onerror.bind(this);
-  req.upload.onprogress = this.onprogress.bind(this);
   var body = new FormData;
   body.append('file', this.file);
-  req.send(body);
-};
+  Submit.call(this, body);
+}
 
-/**
- * Abort the XHR.
- *
- * @api public
- */
-
-Upload.prototype.abort = function(){
-  this.emit('abort');
-  this.req.abort();
-};
-
-/**
- * Error handler.
- *
- * @api private
- */
-
-Upload.prototype.onerror = function(e){
-  this.emit('error', e);
-};
-
-/**
- * Onload handler.
- *
- * @api private
- */
-
-Upload.prototype.onload = function(e){
-  this.emit('end', this.req);
-};
-
-/**
- * Progress handler.
- *
- * @api private
- */
-
-Upload.prototype.onprogress = function(e){
-  e.percent = e.loaded / e.total * 100;
-  this.emit('progress', e);
-};
+Upload.prototype = Submit.prototype;
