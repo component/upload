@@ -51,4 +51,32 @@ describe('Upload', function(){
       }, false);
     })
   })
+
+  describe('#to(path, [fn])', function(){
+    it('should pass errors', function(done){
+      this.timeout(0);
+      input.addEventListener('change', function(){
+        var file = input.files[0];
+        var upload = new Upload(file);
+        upload.to('/failure', function(err){
+          assert('Internal Server Error: something blew up' == err.message);
+          assert(500 == err.status);
+          done();
+        });
+      }, false);
+    })
+
+    it('should pass responses', function(done){
+      this.timeout(0);
+      input.addEventListener('change', function(){
+        var file = input.files[0];
+        var upload = new Upload(file);
+        upload.to('/upload', function(err, res){
+          assert(!err);
+          assert(200 == res.status);
+          done();
+        });
+      }, false);
+    })
+  })
 })

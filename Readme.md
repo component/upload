@@ -26,9 +26,9 @@ var upload = new Upload(file);
 var upload = Upload(file);
 ```
 
-### Upload#to(path)
+### Upload#to(path, [fn])
 
-  __POST__ the multipart upload to `path`.
+  __POST__ the multipart upload to `path` and invoke `fn(err, res)`.
 
 ```js
 upload.to('/upload');

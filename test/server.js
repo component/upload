@@ -20,8 +20,12 @@ app.post('/upload', function(req, res){
   res.send(400);
 });
 
+app.post('/failure', function(req, res){
+  res.send(500, 'something blew up');
+});
+
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/..'));
 
-app.listen(3000);
-console.log('listening on port 3000');
+app.listen(4000);
+console.log('listening on port 4000');
