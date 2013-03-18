@@ -30,6 +30,7 @@ function Upload(file) {
   if (!(this instanceof Upload)) return new Upload(file);
   Emitter.call(this);
   this.file = file;
+  file.slice = file.slice || file.webkitSlice;
 }
 
 /**
