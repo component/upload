@@ -25,7 +25,7 @@ describe('Upload', function(){
         var file = input.files[0];
         var upload = new Upload(file);
         assert(file == upload.file, '.file');
-        upload.to('/upload');
+        upload.to('/upload').send();
         upload.on('end', function(res){
           assert(200 == res.status, '200 response');
           done();
@@ -38,7 +38,7 @@ describe('Upload', function(){
       input.addEventListener('change', function(){
         var file = input.files[0];
         var upload = new Upload(file);
-        upload.to('/upload');
+        upload.to('/upload').send();
 
         upload.on('progress', function(e){
           assert('progress' == e.type);
@@ -63,6 +63,7 @@ describe('Upload', function(){
           assert(500 == err.status);
           done();
         });
+        upload.send();
       }, false);
     })
 
@@ -76,6 +77,7 @@ describe('Upload', function(){
           assert(200 == res.status);
           done();
         });
+        upload.send();
       }, false);
     })
   })

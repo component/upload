@@ -12,6 +12,7 @@
   - `error` an error occurred
   - `abort` upload was aborted
   - `progress` (e) upload in progress (`e.percent`, `e.totalSize` etc)
+  - `send` upload is sent
   - `end` upload is complete
 
 ## API
@@ -34,7 +35,12 @@ var upload = Upload(file);
 upload.to('/upload');
 upload.on('progress', reportProgress);
 upload.on('end', done);
+upload.send();
 ```
+
+### Upload#send()
+
+  Send the upload request.
 
 ## Running tests
 
