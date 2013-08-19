@@ -70,7 +70,11 @@ Upload.prototype.to = function(path, payload, headers, fn){
   // Add extra headers
   headers = headers || {};
   Object.keys(headers).forEach(function(key) {
-    req.setRequestHeader(key, headers[key]);
+    var value = headers[key];
+    if (typeof value === 'function') {
+      value = value();
+    }
+    req.setRequestHeader(key, value);
   });
 
   req.onload = this.onload.bind(this);
@@ -91,7 +95,11 @@ Upload.prototype.to = function(path, payload, headers, fn){
   // Add extra payload
   payload = payload || {};
   Object.keys(payload).forEach(function(key) {
-    body.append(key, payload[key]);
+    var value = payload[key];
+    if (typeof value === 'function') {
+      value = value();
+    }
+    body.append(key, value);
   });
 
   req.send(body);
