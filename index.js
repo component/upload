@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -67,6 +66,7 @@ Upload.prototype.to = function(path, fn){
   };
   var body = new FormData;
   body.append('file', this.file);
+  req.setRequestHeader("X-Requested-With", "XMLHttpRequest");
   req.send(body);
 };
 
