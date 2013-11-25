@@ -26,9 +26,10 @@ module.exports = Upload;
  * @api private
  */
 
-function Upload(file) {
-  if (!(this instanceof Upload)) return new Upload(file);
+function Upload(file, options) {
+  if (!(this instanceof Upload)) return new Upload(file, options);
   Emitter.call(this);
+  this.type = (options || {}).type || 'form-data';
   this.file = file;
   file.slice = file.slice || file.webkitSlice;
 }
@@ -49,7 +50,6 @@ Emitter(Upload.prototype);
 
 Upload.prototype.to = function(path, fn){
   // TODO: x-browser
-  var self = this;
   fn = fn || function(){};
   var req = this.req = new XMLHttpRequest;
   req.open('POST', path);
@@ -65,9 +65,13 @@ Upload.prototype.to = function(path, fn){
       fn(err);
     }
   };
-  var body = new FormData;
-  body.append('file', this.file);
-  req.send(body);
+  if ('body' == this.type) {
+    req.send(this.file);
+  } else {
+    var body = new FormData;
+    body.append('file', this.file);
+    req.send(body);
+  }
 };
 
 /**

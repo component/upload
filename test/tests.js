@@ -66,6 +66,22 @@ describe('Upload', function(){
       }, false);
     })
 
+    it('should upload in request body', function(done){
+      this.timeout(0);
+      input.addEventListener('change', function(){
+        var file = input.files[0];
+        var upload = new Upload(file, { type: 'body' });
+        upload.to('/upload/body', function(err, res){
+          var resLength = parseInt(res.getResponseHeader('content-length'), 10)
+            , resType = res.getResponseHeader('content-type');
+          assert(file.size == resLength);
+          assert(file.type == resType);
+          assert(!err);
+          done();
+        });
+      }, false);
+    })
+
     it('should pass responses', function(done){
       this.timeout(0);
       input.addEventListener('change', function(){
