@@ -55,7 +55,10 @@ describe('Upload', function(){
     })
 
     it('should upload in request body', function(done){
-      var upload = new Upload(file, { type: 'body' });
+      var upload = new Upload(file, {
+          type: 'body'
+        , method: 'put'
+      });
       upload.to('/upload/body', function(err, res){
         var resLength = parseInt(res.getResponseHeader('content-length'), 10)
           , resType = res.getResponseHeader('content-type');

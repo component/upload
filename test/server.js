@@ -20,7 +20,7 @@ app.post('/upload', function(req, res){
   res.send(400);
 });
 
-app.post('/upload/body', function(req, res){
+app.put('/upload/body', function(req, res){
   res.status(200);
   res.setHeader('Content-Type', req.headers['content-type']);
   res.setHeader('Content-Length', req.headers['content-length']);

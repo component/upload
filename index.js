@@ -29,9 +29,11 @@ module.exports = Upload;
 function Upload(file, options) {
   if (!(this instanceof Upload)) return new Upload(file, options);
   Emitter.call(this);
-  this.type = (options || {}).type || 'form-data';
   this.file = file;
   file.slice = file.slice || file.webkitSlice;
+  options = options || {};
+  this.type = options.type || 'form-data';
+  this.method = options.method || 'POST';
 }
 
 /**
@@ -52,7 +54,7 @@ Upload.prototype.to = function(path, fn){
   // TODO: x-browser
   fn = fn || function(){};
   var req = this.req = new XMLHttpRequest;
-  req.open('POST', path);
+  req.open(this.method, path);
   req.onload = this.onload.bind(this);
   req.onerror = this.onerror.bind(this);
   req.upload.onprogress = this.onprogress.bind(this);
