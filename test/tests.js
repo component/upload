@@ -9,7 +9,7 @@ function assert(expr, msg) {
 
 describe('Upload', function(){
   it('should be an emitter', function(done){
-    var upload = new Upload;
+    var upload = new Upload('something');
     upload.on('something', done);
     upload.emit('something');
   })
