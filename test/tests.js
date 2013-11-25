@@ -20,7 +20,6 @@ describe('Upload', function(){
 
   describe('#to(path)', function(){
     it('should POST to the given path', function(done){
-      this.timeout(0);
       var upload = new Upload(file);
       assert(file == upload.file, '.file');
       upload.to('/upload');
@@ -31,7 +30,6 @@ describe('Upload', function(){
     })
 
     it('should emit "progress" events', function(done){
-      this.timeout(0);
       var upload = new Upload(file);
       upload.to('/upload');
 
@@ -48,7 +46,6 @@ describe('Upload', function(){
 
   describe('#to(path, [fn])', function(){
     it('should pass errors', function(done){
-      this.timeout(0);
       var upload = new Upload(file);
       upload.to('/failure', function(err){
         assert('Internal Server Error: something blew up' == err.message);
@@ -58,7 +55,6 @@ describe('Upload', function(){
     })
 
     it('should upload in request body', function(done){
-      this.timeout(0);
       var upload = new Upload(file, { type: 'body' });
       upload.to('/upload/body', function(err, res){
         var resLength = parseInt(res.getResponseHeader('content-length'), 10)
@@ -71,7 +67,6 @@ describe('Upload', function(){
     })
 
     it('should pass responses', function(done){
-      this.timeout(0);
       var upload = new Upload(file);
       upload.to('/upload', function(err, res){
         assert(!err);
