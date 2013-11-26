@@ -16,19 +16,27 @@
 
 ## API
 
-### Upload(file)
+### Upload(file, options)
 
   Initialize an `Upload` with the given `file`, where `file`
   is a `File` object, for example from a `input.files[0]` `FileList`.
 
 ```js
-var upload = new Upload(file);
+var upload = new Upload(file, options);
 var upload = Upload(file);
 ```
 
+#### Options
+
+  By default the file is uploaded as multipart/form-data.
+  To upload it directly in the request body set `type` to `body`.
+  
+  - `type`            `form-data` or `body`
+  - `method`          The used http method
+
 ### Upload#to(path, [fn])
 
-  __POST__ the multipart upload to `path` and invoke `fn(err, res)`.
+  Upload to `path` and invoke `fn(err, res)`.
 
 ```js
 upload.to('/upload');
