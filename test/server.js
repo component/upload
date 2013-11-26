@@ -20,6 +20,13 @@ app.post('/upload', function(req, res){
   res.send(400);
 });
 
+app.put('/upload/body', function(req, res){
+  res.status(200);
+  res.setHeader('Content-Type', req.headers['content-type']);
+  res.setHeader('Content-Length', req.headers['content-length']);
+  req.pipe(res);
+});
+
 app.post('/failure', function(req, res){
   res.send(500, 'something blew up');
 });
