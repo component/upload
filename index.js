@@ -52,6 +52,7 @@ Upload.prototype.to = function(options, fn){
   var path;
   if (typeof options == 'string') {
     path = options;
+    options = {};
   } else {
     path = options.path;
   }
@@ -76,7 +77,7 @@ Upload.prototype.to = function(options, fn){
     req.setRequestHeader(key, headers[key]);
   }
   var body = new FormData;
-  body.append('file', this.file);
+  body.append(options.name || 'file', this.file);
   var data = options.data || {};
   for (key in data) {
     body.append(key, data[key]);
