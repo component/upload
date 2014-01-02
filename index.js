@@ -43,16 +43,40 @@ Emitter(Upload.prototype);
  * Upload to the given `path`.
  *
  * @param {String} path
+ * @param {Object} [payload]
+ * @param {Object} [headers]
  * @param {Function} [fn]
  * @api public
  */
 
-Upload.prototype.to = function(path, fn){
+Upload.prototype.to = function(path, payload, headers, fn){
   // TODO: x-browser
   var self = this;
+
+  // callback is the last argument
+  if (typeof payload === 'function') {
+    payload = {};
+    fn = payload;
+  }
+  if (typeof headers === 'function') {
+    headers = {};
+    fn = headers;
+  }
+
   fn = fn || function(){};
   var req = this.req = new XMLHttpRequest;
   req.open('POST', path);
+
+  // Add extra headers
+  headers = headers || {};
+  Object.keys(headers).forEach(function(key) {
+    var value = headers[key];
+    if (typeof value === 'function') {
+      value = value();
+    }
+    req.setRequestHeader(key, value);
+  });
+
   req.onload = this.onload.bind(this);
   req.onerror = this.onerror.bind(this);
   req.upload.onprogress = this.onprogress.bind(this);
@@ -67,6 +91,17 @@ Upload.prototype.to = function(path, fn){
   };
   var body = new FormData;
   body.append('file', this.file);
+
+  // Add extra payload
+  payload = payload || {};
+  Object.keys(payload).forEach(function(key) {
+    var value = payload[key];
+    if (typeof value === 'function') {
+      value = value();
+    }
+    body.append(key, value);
+  });
+
   req.send(body);
 };
 
