@@ -65,10 +65,22 @@ Upload.prototype.to = function(path, fn){
       fn(err);
     }
   };
-  var body = new FormData;
+  var body = this.body = new FormData;
   body.append('file', this.file);
-  req.send(body);
+  return this;
 };
+
+
+/**
+ * Send the request.
+ *
+ * @api public
+ */
+
+Upload.prototype.send = function(){
+  this.emit('send');
+  this.req.send(this.body);
+}
 
 /**
  * Abort the XHR.
