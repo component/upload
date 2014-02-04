@@ -36,6 +36,41 @@ upload.on('progress', reportProgress);
 upload.on('end', done);
 ```
 
+### Upload#setPath(path)
+
+  Creates the xhr for the given path.  Calling `setPath` will setup the following:
+
+  * `upload.req` - xhr object
+  * `upload.body` - FormData
+
+### Upload#setParamName(name)
+
+  Use a parameter name other than `file` for your file.
+
+### Upload#start(fn)
+
+  Start the upload.
+
+## Custom example
+
+  If the defaults are not correct for you use case, you can modify your upload before starting:
+  In this example we have to include some extra information with our upload:
+
+  * the parameter name for the file is `audio` instead of `file`
+  * `upload.req` (the xhr) is accessed to set an Authorization header
+  * `upload.body` (the FormData) is accessed to append an additional form field
+
+```js
+var upload = new Upload(file);
+upload.setPath('https://uploads.example.com/');
+upload.setParamName('audio');
+upload.req.setRequestHeader('Authorization', myAuth);
+upload.body.append('templateId', 'some-uuid');
+upload.start(function() {
+  console.log('hooray!');
+});
+```
+
 ## Running tests
 
   Run the Express test server:

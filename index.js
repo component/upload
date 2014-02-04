@@ -49,13 +49,26 @@ Emitter(Upload.prototype);
 
 Upload.prototype.to = function(path, fn){
   // TODO: x-browser
-  var self = this;
-  fn = fn || function(){};
+  this.setPath(path);
+  this.start(fn);
+};
+
+Upload.prototype.setParamName = function(param) {
+  this.param = param;
+}
+
+Upload.prototype.setPath = function(path){
   var req = this.req = new XMLHttpRequest;
   req.open('POST', path);
   req.onload = this.onload.bind(this);
   req.onerror = this.onerror.bind(this);
   req.upload.onprogress = this.onprogress.bind(this);
+  this.body = new FormData;
+}
+
+Upload.prototype.start = function(fn) {
+  fn = fn || function(){};
+  var req = this.req;
   req.onreadystatechange = function(){
     if (4 == req.readyState) {
       var type = req.status / 100 | 0;
@@ -65,10 +78,10 @@ Upload.prototype.to = function(path, fn){
       fn(err);
     }
   };
-  var body = new FormData;
-  body.append('file', this.file);
-  req.send(body);
-};
+  var param = this.param || 'file';
+  this.body.append(param, this.file);
+  req.send(this.body);
+}
 
 /**
  * Abort the XHR.
