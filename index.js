@@ -42,13 +42,20 @@ Emitter(Upload.prototype);
 /**
  * Upload to the given `path`.
  *
- * @param {String} path
+ * @param {String} options
  * @param {Function} [fn]
  * @api public
  */
 
-Upload.prototype.to = function(path, fn){
+Upload.prototype.to = function(options, fn){
   // TODO: x-browser
+  var path;
+  if (typeof options == 'string') {
+    path = options;
+    options = {};
+  } else {
+    path = options.path;
+  }
   var self = this;
   fn = fn || function(){};
   var req = this.req = new XMLHttpRequest;
@@ -65,8 +72,16 @@ Upload.prototype.to = function(path, fn){
       fn(err);
     }
   };
+  var key, headers = options.headers || {};
+  for (key in headers) {
+    req.setRequestHeader(key, headers[key]);
+  }
   var body = new FormData;
-  body.append('file', this.file);
+  body.append(options.name || 'file', this.file);
+  var data = options.data || {};
+  for (key in data) {
+    body.append(key, data[key]);
+  }
   req.send(body);
 };
 
