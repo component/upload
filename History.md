@@ -1,4 +1,10 @@
 
+0.2.0 / 2014-09-29
+==================
+
+ * Make options an object. You can configure upload path now.
+ * Add extra headers and data for Ajax
+
 0.1.1 / 2013-03-18 
 ==================
 
