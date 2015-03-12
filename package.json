@@ -7,7 +7,10 @@
     "file"
   ],
   "dependencies": {
-    "emitter-component": "*"
+    "component-emitter": "*"
+  },
+  "browser": {
+    "emitter": "component-emitter"
   },
   "devDependencies": {
     "express": "3.0.0rc4"
