@@ -1,6 +1,5 @@
 {
   "name": "upload-component",
-  "repo": "component/upload",
   "description": "file upload and progress api",
   "version": "0.2.0",
   "keywords": [
