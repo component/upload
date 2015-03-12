@@ -15,11 +15,6 @@
   "devDependencies": {
     "express": "3.0.0rc4"
   },
-  "component": {
-    "scripts": {
-      "upload/index.js": "index.js"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/component/upload.git"
