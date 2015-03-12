@@ -1,4 +1,12 @@
 
+0.3.0 / 2015-03-12
+==================
+
+  * package: rename to "component-upload"
+  * package: remove "component" section
+  * package: use "component-emitter", fix browserify build
+  * package: remove "repo" field
+
 0.2.0 / 2014-09-29
 ==================
 
